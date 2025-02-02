@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  shortlink.db:
+    image: mongo:latest
+    container_name: shortlink.db
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: azerty
+      MONGO_INITDB_DATABASE: shortlink
+    volumes:
+      - mongo_data:/data/db
+
+  shortlink.backend.app:
+    build:
+      context: ./short-link-backend/.
+      dockerfile: Dockerfile
+    container_name: shortlink.backend.app
+    ports:
+      - "5000:5000"
+    links:
+      - shortlink.db
+    depends_on:
+      - shortlink.db
+    restart: always
+
+  shortlink.frontend.app:
+    build:
+      context: ./short-link-frontend/.
+      dockerfile: Dockerfile
+    container_name: shortlink.frontend.app
+    ports:
+      - "8081:80"
+    links:
+      - shortlink.backend.app
+    depends_on:
+      - shortlink.backend.app
+    restart: always
+
+volumes:
+  mongo_data:
+
+

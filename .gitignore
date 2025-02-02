@@ -1,0 +1,38 @@
+# Ignore node_modules in both backend and frontend
+**/node_modules/
+
+# Ignore build outputs for both backend and frontend
+**/dist/
+**/build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+# Vite specific (frontend)
+**/short-link-frontend/.vite/
+
+# Editor directories and files (ignores .vscode/ in any folder)
+**/.vscode/
+vscode/
+
+# Ignore TypeScript build information (if used in backend)
+**/*.tsbuildinfo
+
+# Optional: Docker related files
+.dockerignore
+
+# Optional: package-lock.json and yarn.lock files for frontend and backend (if you don't want to commit them)
+**/short-link-frontend/package-lock.json
+**/short-link-frontend/yarn.lock
+**/short-link-backend/package-lock.json
+**/short-link-backend/yarn.lock
+
+# Coverage directory for test coverage
+coverage/
+
