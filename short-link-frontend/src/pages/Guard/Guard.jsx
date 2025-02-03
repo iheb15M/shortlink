@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getData, postData } from "../../services/api";
 import locked from "../../assets/Locked.svg";
 import Input from "../../components/Input";
@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import Button from "../../components/Button";
 function Guard() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [urlInfo, setUrlInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [backendError, setbackendError] = useState(undefined);
@@ -25,7 +26,9 @@ function Guard() {
           setLoading(false);
         }
       } catch (error) {
-        console.error(error.message);
+        if(error.status === 404){
+          navigate('/not-found')
+        }
       }
     }
     fetchData();

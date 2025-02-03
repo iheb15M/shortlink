@@ -9,19 +9,6 @@ const api = axios.create({
   },
 });
 
-export const setupInterceptors = (navigate) => {
-  api.interceptors.response.use(
-    (response) =>  response,
-    (error) => {
-      if (error.response && error.response.status === 404) {
-        navigate("/not-found", { replace: true });
-      }
-      return Promise.reject(error);
-    }
-  );
-};
-
-
 // API functions
 export const getData = async (endpoint, params = {}) => {
   try {

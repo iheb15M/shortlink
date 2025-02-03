@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getData } from "../../services/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
 
 function LinkInfo() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const navigate = useNavigate();
   const [backendError, setbackendError] = useState(undefined);
   const [urlInfo, setUrlInfo] = useState({});
   const [copyMessage, setCopyMessage] = useState("");
@@ -25,6 +26,9 @@ function LinkInfo() {
         const response = await getData(`info/${id}`);
         setUrlInfo(response.data);
       } catch (error) {
+        if(error.status === 404){
+          navigate('/not-found')
+        }
         setbackendError(error.response.data.message || error.message);
       }
     }

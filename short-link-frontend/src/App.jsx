@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { Navigate, NavLink, Route, Routes, useNavigate } from "react-router-dom";
-import { setupInterceptors } from "./services/api";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+
 import Home from "./pages/Home/Home";
 import LinkInfo from "./pages/LinkInfo/LinkInfo";
 import Guard from "./pages/Guard/Guard";
@@ -9,11 +8,6 @@ import appLogo from "./assets/logo.webp";
 
 
 function App() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setupInterceptors(navigate);
-  }, [navigate]);
   return (
     <div className="w-screen h-screen flex flex-col justify-between items-center bg-light py-5">
       <header>
